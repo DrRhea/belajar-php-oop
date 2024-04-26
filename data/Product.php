@@ -1,11 +1,14 @@
 <?php
+  interface getInfo {
+    public function getFullLabel();
+  }
 
   abstract class Product{
-    private $title,
-            $author,
-            $publisher,
-            $price,
-            $discount = 0;
+    protected $title,
+              $author,
+              $publisher,
+              $price,
+              $discount = 0;
 
     public function __construct($title = "title", $author = "author", $publisher = "publisher", $price = 0) {
       $this->title = $title;
@@ -53,14 +56,10 @@
       return "$this->author, $this->publisher";
     }
 
-    abstract public function getFullLabel();
-
-    public function getInfo() {
-      return "$this->title | {$this->getLabel()} (Rp$this->price)";
-    }
+    abstract public function getInfo();
   }
 
-  class Comic extends Product {
+  class Comic extends Product implements getInfo {
     public $pages;
 
     public function __construct($title = "title", $author = "author", $publisher = "publisher", $price = 0, $pages = 0) {
@@ -71,9 +70,13 @@
     public function getFullLabel() {
       return "Comic : " . $this->getInfo() . " - {$this->pages} pages\n";
     }
+
+    public function getInfo() {
+      return "$this->title | {$this->getLabel()} (Rp$this->price)";
+    }
   }
 
-  class Game extends Product {
+  class Game extends Product implements getInfo {
     public $hours;
 
     public function __construct($title = "title", $author = "author", $publisher = "publisher", $price = 0, $hours = 0) {
@@ -83,6 +86,10 @@
     }
     public function getFullLabel() {
       return "Game : " . $this->getInfo() . " ~ {$this->hours} hours\n";
+    }
+
+    public function getInfo() {
+      return "$this->title | {$this->getLabel()} (Rp$this->price)";
     }
   }
 
