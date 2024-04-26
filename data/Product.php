@@ -1,17 +1,48 @@
 <?php
 
   class Product{
-    public  $title,
+    private $title,
             $author,
-            $publisher;
-
-    protected $discount;
-    private $price;
+            $publisher,
+            $price,
+            $discount = 0;
 
     public function __construct($title = "title", $author = "author", $publisher = "publisher", $price = 0) {
       $this->title = $title;
       $this->author = $author;
       $this->publisher = $publisher;
+      $this->price = $price;
+    }
+
+    public function setTitle($title) {
+      $this->title = $title;
+    }
+
+    public function getTitle() {
+      return $this->title;
+    }
+
+    public function setAuthor($author) {
+      $this->author = $author;
+    }
+
+    public function getAuthor() {
+      return $this->author;
+    }
+
+    public function setPublisher($publisher) {
+      $this->publisher = $publisher;
+    }
+
+    public function getPublisher() {
+      return $this->publisher;
+    }
+
+    public function setDiscount($discount) {
+      $this->discount = $discount;
+    }
+
+    public function setPrice($price) {
       $this->price = $price;
     }
 
@@ -46,10 +77,6 @@
       parent::__construct($title, $author, $publisher, $price);
 
       $this->hours = $hours;
-    }
-
-    public function setDiscount($discount) {
-      $this->discount = $discount;
     }
     public function getFullLabel() {
       return "Game : " . parent::getFullLabel() . " ~ {$this->hours} hours\n";

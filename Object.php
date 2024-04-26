@@ -10,6 +10,6 @@
 
   echo "\n";
 
-  $Product2->setDiscount(50);
-  echo $Product2->getPrice();
+  $Product2->setTitle("Spiderman");
+  echo $Product2->getTitle();
 
