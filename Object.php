@@ -8,5 +8,8 @@
   $Product2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 250000, 50);
   echo $Product2->getFullLabel();
 
+  echo "\n";
 
+  $Product2->setDiscount(50);
+  echo $Product2->getPrice();
 
