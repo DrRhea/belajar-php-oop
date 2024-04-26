@@ -13,6 +13,12 @@
       $this->price = $price;
     }
     public function getLabel() {
-      return "$this->author, $this->publisher\n";
+      return "$this->author, $this->publisher";
+    }
+  }
+
+  class PrintProductInfo{
+    public function printProduct(Product $product){
+      return "{$product->title} | {$product->getLabel()} | {$product->price}\n";
     }
   }
