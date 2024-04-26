@@ -1,6 +1,6 @@
 <?php
 
-  class Product{
+  abstract class Product{
     private $title,
             $author,
             $publisher,
@@ -53,7 +53,9 @@
       return "$this->author, $this->publisher";
     }
 
-    public function getFullLabel() {
+    abstract public function getFullLabel();
+
+    public function getInfo() {
       return "$this->title | {$this->getLabel()} (Rp$this->price)";
     }
   }
@@ -67,9 +69,10 @@
       $this->pages = $pages;
     }
     public function getFullLabel() {
-      return "Comic : " . parent::getFullLabel() . " - {$this->pages} pages\n";
+      return "Comic : " . $this->getInfo() . " - {$this->pages} pages\n";
     }
   }
+
   class Game extends Product {
     public $hours;
 
@@ -79,6 +82,25 @@
       $this->hours = $hours;
     }
     public function getFullLabel() {
-      return "Game : " . parent::getFullLabel() . " ~ {$this->hours} hours\n";
+      return "Game : " . $this->getInfo() . " ~ {$this->hours} hours\n";
+    }
+  }
+
+  class printProductInfo {
+    public $listProduct = [];
+    public static $count = 1;
+
+    public function addProduct(Product $product) {
+      return $this->listProduct[] = $product;
+    }
+
+    public function printProduct() {
+      $text = "LIST OF PRODUCTS :\n";
+
+      foreach($this->listProduct as $product) {
+        $text .= self::$count++ . ". " . $product->getFullLabel();
+      }
+
+      return $text;
     }
   }
