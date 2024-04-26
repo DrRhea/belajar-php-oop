@@ -6,36 +6,32 @@
             $publisher,
             $price,
             $pages,
-            $hours,
-            $type;
+            $hours;
 
-    public function __construct($title = "title", $author = "author", $publisher = "publisher", $price = 0, $pages = 0, $hours = 0, $type = "type"){
+    public function __construct($title = "title", $author = "author", $publisher = "publisher", $price = 0, $pages = 0, $hours = 0) {
       $this->title = $title;
       $this->author = $author;
       $this->publisher = $publisher;
       $this->price = $price;
       $this->pages = $pages;
       $this->hours = $hours;
-      $this->type = $type;
     }
     public function getLabel() {
       return "$this->author, $this->publisher";
     }
 
     public function getFullLabel() {
-      $text = "{$this->type} : {$this->title} | {$this->getLabel()} (Rp{$this->price}) ";
-
-      if($this->type == "Comic")
-        $text .= "- {$this->pages} pages\n";
-      else if($this->type == "Game")
-        $text .= "~ {$this->hours} hours\n";
-
-      return $text;
+      return "{$this->title} | {$this->getLabel()} (Rp{$this->price})";
     }
   }
 
-  class PrintProductInfo{
-    public function printProduct(Product $product){
-      return "{$product->title} | {$product->getLabel()} | {$product->price}\n";
+  class Comic extends Product {
+    public function getFullLabel() {
+      return "Comic : {$this->title} | {$this->getLabel()} (Rp{$this->price}) - {$this->pages} pages\n";
+    }
+  }
+  class Game extends Product {
+    public function getFullLabel() {
+      return "Game : {$this->title} | {$this->getLabel()} (Rp{$this->price}) ~ {$this->hours} hours\n";
     }
   }
